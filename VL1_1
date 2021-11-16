@@ -1,0 +1,6 @@
+using Linear Algebra
+
+m=5
+A=randn(m,m)
+
+printA
