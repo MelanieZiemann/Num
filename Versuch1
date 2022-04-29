@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+r=np.array([235,214,192.5,171.5,150,130.5,111.5,95,81,70,61,53.5])# Radien in mm
+T=np.array([6.9, 8.9, 11.2, 14.4, 19.3, 24.6, 32.1, 39.8, 49.8, 60.3, 69.6, 82.9])#Temperaturen in Celsius
+
+Ts=max(T)
+Td=min(T)
+rs=max(r)
+rd=min(r)
+
+i=range(0,12)
+a=1/r[i]
+b=1/rs
+c=1/rd
+d=(b-a)/(b-c)
+e=Ts-Td
+f=d*e
+TR=Ts-f
+
+#Eingabe der Fehler
+rerror=0.5# in mm
+Terror=1# in Kelvin= Celsius
+#erstellen des Diagrammes
+plt.xlabel("Radius [mm]")
+plt.ylabel("Temperatur [°C]")
+plt.plot(r,T, label ='Messung')#Temperatur der Messung
+plt.plot(r,TR, label = 'Theorie')#Theoretischer Temperaturverlauf
+plt.scatter(r,T,color='green')
+plt.xlim(250, 50)# Kuvenverlauf angepasst
+plt.ylim(5, 90)
+plt.grid(color ='grey',linestyle ='-',linewidth=1)
+plt.errorbar(r,T,xerr=rerror,yerr=Terror, fmt='kx')
+plt.legend("Temperaturverlauf")
+plt.title("Versuch 1: Temperaturverlauf in einem wärmeleitenden Körper")
+plt.savefig('Versuch1_png')
+plt.show()
+
